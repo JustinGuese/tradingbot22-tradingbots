@@ -1,5 +1,7 @@
 from requests import get, post, put
 from urllib.parse import quote_plus
+from datetime import date, datetime, timedelta
+import pandas as pd
 
 class BaseBot:
 
@@ -52,6 +54,23 @@ class BaseBot:
         response = put(self.backendurl + '/sell/', params=params, headers=self.headers)
         if response.status_code != 200:
             raise Exception("Error selling: ", response.text)
+
+    def getData(self, ticker: str, start_date: date = (datetime.utcnow() - timedelta(7)).date(), 
+        end_date: date = datetime.utcnow().date(), technical_indicators: list = []):
+        json_data = {
+            'ticker': ticker,
+            'start_date': start_date.strftime("%Y-%m-%d"),
+            'end_date': end_date.strftime("%Y-%m-%d"),
+            'technical_analysis_columns': technical_indicators,
+        }
+        response = post(self.backendurl + '/data/', json=json_data, headers=self.headers)
+        if response.status_code != 200:
+            raise Exception("Error getting data: ", response.text)
+        df = pd.DataFrame(response.json())
+        df.set_index("timestamp", inplace=True)
+        df.sort_index(inplace=True)
+        # df = df[::-1]
+        return df
 
 if __name__ == "__main__":
     bot = BaseBot("testbot")
