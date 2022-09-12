@@ -4,6 +4,7 @@ import pandas as pd
 from tqdm import tqdm
 import numpy as np
 import json
+from os import environ
 
 class RSIExampleBot(BaseBot):
     def __init__(self, name: str, stock: str, backendurl: str = "http://127.0.0.1:8000"):
@@ -69,6 +70,6 @@ class RSIExampleBot(BaseBot):
             print("not doing/holding ", self.stock)
 
 if __name__ == "__main__":
-    bot = RSIExampleBot("rsi-bot-AAPL", "AAPL")
+    bot = RSIExampleBot("rsi-bot-" + environ["TICKER"], environ["TICKER"], backendurl="http://tradingbot-baseimage-service:8000")
     # winOverHolding = bot.backtest()
     bot.run()
