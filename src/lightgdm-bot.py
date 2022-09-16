@@ -120,6 +120,6 @@ class LGBBot(BaseBot):
                 print("nothing to do")
 
 if __name__ == "__main__":
-    bot = LGBBot("lgb-bot-" + environ["TICKER"], environ["TICKER"]) # , backendurl="http://tradingbot-baseimage-service:8000"
+    bot = LGBBot("lgb-bot-" + environ["TICKER"], environ["TICKER"], backendurl="http://tradingbot-baseimage-service:8000") # , backendurl="http://tradingbot-baseimage-service:8000"
     # winOverHolding = bot.backtest()
     bot.run()
