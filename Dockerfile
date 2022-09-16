@@ -1,4 +1,5 @@
 FROM python:3.10-slim
+RUN apt update && apt install libgomp1 -y
 RUN mkdir /app
 WORKDIR /app
 COPY ./src/requirements.txt /app
