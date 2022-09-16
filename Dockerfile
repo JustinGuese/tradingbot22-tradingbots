@@ -3,6 +3,6 @@ RUN mkdir /app
 WORKDIR /app
 COPY ./src/requirements.txt /app
 RUN pip install -r requirements.txt
-COPY ./basebot.py /app/
+COPY ./src/basebot.py /app/
 COPY ./src/lightgdm-bot.py /app/
 CMD ["python", "lightgdm-bot.py"]
