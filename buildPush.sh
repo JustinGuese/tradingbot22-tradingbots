@@ -1,3 +1,3 @@
 #!/bin/bash
-docker build -t guestros/tradingbot22-bot:latest ./src/
-docker push guestros/tradingbot22-bot:latest
+docker build -t guestros/tradingbot22-bot:lightgbm ./src/
+docker push guestros/tradingbot22-bot:lightgbm
