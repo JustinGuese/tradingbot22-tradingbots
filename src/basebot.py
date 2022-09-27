@@ -1,7 +1,9 @@
-from requests import get, post, put
-from urllib.parse import quote_plus
 from datetime import date, datetime, timedelta
+from urllib.parse import quote_plus
+
 import pandas as pd
+from requests import get, post, put
+
 
 class BaseBot:
 
@@ -71,6 +73,12 @@ class BaseBot:
         df.sort_index(inplace=True)
         # df = df[::-1]
         return df
+    
+    def getCurrentPrice(self, ticker: str):
+        response = get(self.backendurl + '/data/current_price/' + quote_plus(ticker), headers=self.headers)
+        if response.status_code != 200:
+            raise Exception("Error getting current price data: ", response.text)
+        return float(response.text)
 
 if __name__ == "__main__":
     bot = BaseBot("testbot")

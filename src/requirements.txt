@@ -2,4 +2,3 @@ pandas
 numpy
 tqdm
 requests
-lightgbm

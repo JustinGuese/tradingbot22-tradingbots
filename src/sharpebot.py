@@ -1,18 +1,18 @@
-from basebot import BaseBot
+import json
 from datetime import date
+from os import environ
+
+import numpy as np
 import pandas as pd
 from tqdm import tqdm
-import numpy as np
-import json
-from os import environ
-import lightgbm as lgb
-from sklearn.model_selection import train_test_split
+
+from basebot import BaseBot
 
 
-class LGBBot(BaseBot):
+class SharpeNSDAQ(BaseBot):
     def __init__(self, name: str, stock: str, backendurl: str = "http://127.0.0.1:8000"):
         super().__init__(name, backendurl)
-        self.stock = stock
+        self.weights = {'AMD': 347.631056870226, 'AMZN': 247.81006912476, 'DG': 141.003881751059, 'KDP': 1485.450605381366, 'LLY': 1388.033974239308, 'NOC': 67.772276784775, 'NVDA': 1187.985480312478, 'PGR': 2717.5659934476557, 'TEAM': 448.23506007358895, 'TSLA': 664.717694746977, 'UNH': 354.36330165354804, 'WM': 949.430605614265}
 
     def prepareData(self, df):
         df["pctChange"] = df["SMA_3"].pct_change()
