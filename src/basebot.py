@@ -1,13 +1,10 @@
 from datetime import date, datetime, timedelta
-from math import sqrt
 from urllib.parse import quote_plus
 
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from requests import get, post, put
 from scipy.signal import argrelextrema
-from sklearn.linear_model import LinearRegression
 
 
 class BaseBot:

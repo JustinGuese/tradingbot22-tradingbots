@@ -4,5 +4,5 @@ WORKDIR /app
 COPY requirements.txt /app
 RUN pip install -r requirements.txt
 COPY ./basebot.py /app/
-COPY rsiexamplebot.py /app/
-CMD ["python", "rsiexamplebot.py"]
+COPY trendbot.py /app/
+CMD ["python", "trendbot.py"]

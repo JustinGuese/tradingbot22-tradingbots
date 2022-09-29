@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: tradingbot22-lightgbm-bot-aapl
+  name: tradingbot22-simpletrendbot-eem
   namespace: tradingbot22
 spec:
   schedule: "1 16 * * *"
@@ -11,12 +11,12 @@ spec:
       template:
         spec:
           containers:
-          - name: tradingbot22-rsi-bot-aapl
-            image: guestros/tradingbot22-bot:lightgbm
+          - name: tradingbot22-rsi-bot-eem
+            image: guestros/tradingbot22-bot:simple-trendbot
             imagePullPolicy: Always
             env:
             - name: TICKER
-              value: "AAPL"
+              value: "EEM"
             # command:
             # - /bin/sh
             # - -c
