@@ -1,8 +1,13 @@
 from datetime import date, datetime, timedelta
+from math import sqrt
 from urllib.parse import quote_plus
 
+import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 from requests import get, post, put
+from scipy.signal import argrelextrema
+from sklearn.linear_model import LinearRegression
 
 
 class BaseBot:
@@ -79,6 +84,30 @@ class BaseBot:
         if response.status_code != 200:
             raise Exception("Error getting current price data: ", response.text)
         return float(response.text)
+    
+    def getTrend(self, df: pd.DataFrame) -> pd.DataFrame:
+        if "adj_close" not in df:
+            raise ValueError("adj_close not in dataframe: " + str(df.columns))
+        price = df["adj_close"]
+        # moving average
+        price = price.rolling(window=20).mean()
+        price = price.fillna(method='bfill')
+        # for local maxima
+        maxima = argrelextrema(price.values, np.greater)
+
+        # for local minima
+        minima = argrelextrema(price.values, np.less)
+        # convert that to a target variable
+        signal = np.zeros(len(price))
+        lastSignal  = 0
+        for i in range(len(price)):
+            if i in maxima[0]:
+                lastSignal = -1
+            elif i in minima[0]:
+                lastSignal = 1
+            signal[i] = lastSignal
+        return signal
+        
 
 if __name__ == "__main__":
     bot = BaseBot("testbot")
@@ -90,3 +119,13 @@ if __name__ == "__main__":
     bot.sell("AAPL", 1500, amountInUSD=True)
     print(bot.getPortfolio())
     print("portfolio worth is: %.2f dollars" % bot.getPortfolioWorth())
+
+# # trend functionality test
+# if __name__ == "__main__":
+#     bot = BaseBot("testbot")
+#     aapl = bot.getData("AAPL", start_date = datetime(2019,1,1).date())
+#     bot.getTrend(aapl)
+#     aapl["signal"] = bot.getTrend(aapl)
+#     print(aapl.head())
+#     print(aapl["signal"].value_counts())
+    

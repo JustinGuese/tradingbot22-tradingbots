@@ -2,4 +2,5 @@ pandas
 numpy
 tqdm
 requests
-lightgbm
+scipy
+sklearn
