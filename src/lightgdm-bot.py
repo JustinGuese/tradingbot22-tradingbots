@@ -25,7 +25,7 @@ class LGBBot(BaseBot):
         df = df.drop(["signal", "ticker"], axis = 1)
         # del df
         x_train, x_test, y_train, y_test = train_test_split(
-            df, y, test_size=0.05, shuffle = True)
+            df, y, test_size=0.05, shuffle = False)
         train_data = lgb.Dataset(x_train, label = y_train)
         validation_data = lgb.Dataset(x_test, label=y_test, reference=train_data)
         return df, train_data, validation_data, x_test, y_test
