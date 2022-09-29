@@ -4,8 +4,8 @@ metadata:
   name: tradingbot22-simpletrendbot-aapl
   namespace: tradingbot22
 spec:
-  # schedule: "1 16 * * *"
-  schedule: "* * * * *"
+  schedule: "1 16 * * *"
+  # schedule: "* * * * *"
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
