@@ -13,11 +13,10 @@ from scipy.signal import argrelextrema
 
 class BaseBot:
 
-    def __init__(self, name: str, stocks: List[str], backendurl: str = "http://127.0.0.1:8000"):
+    def __init__(self, name: str, backendurl: str = "http://127.0.0.1:8000"):
         self.backendurl: str = backendurl
         self.headers: dict = { 'accept': 'application/json', 'Content-Type': 'application/json'}
         self.name: str = self.checkOrCreate(name)
-        self.stocks: List[str] = stocks
     
     def checkOrCreate(self, name: str) -> str:
         response = get(self.backendurl + '/bot/' + quote_plus(name), headers=self.headers)
