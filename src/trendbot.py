@@ -2,8 +2,7 @@ from datetime import datetime, timedelta
 from os import environ
 
 import numpy as np
-
-from basebot import BaseBot
+from basebot22.basebot import BaseBot
 
 
 class TrendBot(BaseBot):
@@ -37,6 +36,6 @@ class TrendBot(BaseBot):
             print("doing nothing...")
         
 if __name__ == "__main__":
-    bot = TrendBot("simpletrendbot-" + environ["TICKER"], environ["TICKER"], backendurl = "http://tradingbot-baseimage-service:8000")
+    bot = TrendBot("simpletrendbot-" + environ["TICKER"], environ["TICKER"]) # , backendurl = "http://tradingbot-baseimage-service:8000")
     decision = bot.getCurrentTrend()
     bot.act(decision)
