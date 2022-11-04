@@ -1,0 +1,128 @@
+{
+    "AAPL": {
+        "win": 28917.28556962374,
+        "depth": 15,
+        "leafes": 50,
+        "lookback": 0
+    },
+    "MSFT": {
+        "win": 28842.903813544464,
+        "depth": 15,
+        "leafes": 30,
+        "lookback": 0
+    },
+    "GOOG": {
+        "win": 9636.655249155003,
+        "depth": 15,
+        "leafes": 40,
+        "lookback": 0
+    },
+    "TSLA": {
+        "win": 392732.06311513844,
+        "depth": 15,
+        "leafes": 50,
+        "lookback": 0
+    },
+    "AMD": {
+        "win": 75832.41329791669,
+        "depth": 15,
+        "leafes": 50,
+        "lookback": 0
+    },
+    "AMZN": {
+        "win": 13550.201427755437,
+        "depth": 15,
+        "leafes": 50,
+        "lookback": 0
+    },
+    "DG": {
+        "win": 22866.93711063399,
+        "depth": 15,
+        "leafes": 30,
+        "lookback": 0
+    },
+    "KDP": {
+        "win": 8642.174958720549,
+        "depth": 15,
+        "leafes": 50,
+        "lookback": 0
+    },
+    "LLY": {
+        "win": 26227.526154576713,
+        "depth": 15,
+        "leafes": 50,
+        "lookback": 0
+    },
+    "NOC": {
+        "win": 5323.5153216676445,
+        "depth": 15,
+        "leafes": 40,
+        "lookback": 0
+    },
+    "NVDA": {
+        "win": 27187.668400476447,
+        "depth": 15,
+        "leafes": 50,
+        "lookback": 0
+    },
+    "PGR": {
+        "win": 25648.288395475654,
+        "depth": 20,
+        "leafes": 50,
+        "lookback": 0
+    },
+    "TEAM": {
+        "win": 151422.59470975798,
+        "depth": 15,
+        "leafes": 50,
+        "lookback": 0
+    },
+    "UNH": {
+        "win": 16236.208592368064,
+        "depth": 15,
+        "leafes": 30,
+        "lookback": 0
+    },
+    "WM": {
+        "win": 11612.0096601712,
+        "depth": 15,
+        "leafes": 15,
+        "lookback": 3
+    },
+    "CWEG.L": {
+        "win": 15479.247590946838,
+        "depth": 15,
+        "leafes": 40,
+        "lookback": 0
+    },
+    "IWDA.AS": {
+        "win": 10093.24850726941,
+        "depth": 15,
+        "leafes": 50,
+        "lookback": 0
+    },
+    "EEM": {
+        "win": 2633.1865848899506,
+        "depth": 15,
+        "leafes": 40,
+        "lookback": 0
+    },
+    "BTC-USD": {
+        "win": 123100.06724526032,
+        "depth": 15,
+        "leafes": 50,
+        "lookback": 5
+    },
+    "ETH-USD": {
+        "win": 153968.217223872,
+        "depth": 15,
+        "leafes": 30,
+        "lookback": 5
+    },
+    "AVAX-USD": {
+        "win": 188620.18504827714,
+        "depth": 20,
+        "leafes": 40,
+        "lookback": 0
+    }
+}
