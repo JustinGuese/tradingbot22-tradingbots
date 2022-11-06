@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tradingbot22-decisiontreebot-v1-pvc
+  namespace: tradingbot22
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Mi
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: tradingbot22-decisiontreebot-v1
+  namespace: tradingbot22
+spec:
+  schedule: "1 17 * * *"
+  # schedule: "* * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: tradingbot22-decisiontreebot-v1
+            # decision-tree-bot/Dockerfile
+            image: guestros/tradingbot22-bot:decisiontreebot-v1
+            imagePullPolicy: Always
+            volumeMounts:
+              - mountPath: /app/bestSettings/
+                name: decisiontreebestsettings
+          volumes:
+            - name: decisiontreebestsettings
+              persistentVolumeClaim:
+                claimName: tradingbot22-decisiontreebot-v1-pvc
+          restartPolicy: OnFailure

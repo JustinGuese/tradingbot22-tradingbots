@@ -13,7 +13,7 @@ from scipy.signal import argrelextrema
 
 class BaseBot:
 
-    def __init__(self, name: str, backendurl: str = "http://127.0.0.1:8000"):
+    def __init__(self, name: str, backendurl: str = "http://tradingbot-baseimage-service:8000"):
         self.backendurl: str = backendurl
         self.headers: dict = { 'accept': 'application/json', 'Content-Type': 'application/json'}
         self.name: str = self.checkOrCreate(name)

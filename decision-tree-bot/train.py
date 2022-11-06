@@ -1,9 +1,10 @@
 import json
-from datetime import date, datetime
+from datetime import date
+from os import path
+from pathlib import Path
 
 import numpy as np
-from scipy.signal import argrelextrema
-from sklearn.tree import DecisionTreeClassifier, _tree, export_graphviz
+from sklearn.tree import DecisionTreeClassifier, _tree
 from tqdm import tqdm
 
 from basebot import BaseBot
@@ -82,7 +83,7 @@ def tree_to_code(tree, feature_names):
 def getBestTree(ticker):
     global code
     bot = BaseBot("testbot")
-    data = bot.getData(ticker, date(2015,1,1), date.today())
+    data = bot.getData(ticker, date(2015,1,1), date.today(), technical_indicators = ["all"])
     data = bot.getTrend(data)
 
     # get baseline
@@ -107,8 +108,8 @@ def getBestTree(ticker):
     bestDepthWin = -9999
     collection = []
     # explicitly force a max of 20 to prevent overfitting
-    for depth in [50,40,30,20,15]:
-        for leafes in [50,40,30,20,15]:
+    for depth in [50,40,30,20,15,10,5]:
+        for leafes in [50,40,30,20,15,10,5]:
             clf = DecisionTreeClassifier(max_depth=depth, max_leaf_nodes = leafes)
             # train with bigdf, test with df (all world)
             clf.fit(X,Y)
@@ -124,11 +125,17 @@ def getBestTree(ticker):
     print("the best depth is %d, best leave %d, best lookback %d. with a win of %.2f$" % (bestDepth, bestLeafes, bestLookback, bestDepthWin))
     code = ""
     tree_to_code(clf, X.columns)
+    # make sure bestSettings folder exists
+    Path("bestSettings").mkdir(parents=True, exist_ok=True)
+    
     with open("bestSettings/%s.py" % ticker, "w") as f:
         f.write(code)
     code = ""
-    with open("bestSettings/all.json", "r") as f:
-        settings = json.load(f)
+    if path.exists("bestSettings/all.json"):
+        with open("bestSettings/all.json", "r") as f:
+            settings = json.load(f)
+    else:
+        settings = {}
     settings[ticker] = {"win" : bestDepthWin, "depth": bestDepth, "leafes": bestLeafes, "lookback": bestLookback}
     with open("bestSettings/all.json", "w") as f:
         json.dump(settings, f, indent = 4)
@@ -139,5 +146,9 @@ ALLOWED_STOCKS = [
     "BTC-USD", "ETH-USD", "AVAX-USD" # crypto
 ]
 
-for ticker in tqdm(ALLOWED_STOCKS):
-    getBestTree(ticker)
+# only do this on the first of the month or if the file does not exist
+today = date.today()
+if today.day == 1 or not path.exists("bestSettings/all.json"):
+    print("running getBestTree for all stocks")
+    for ticker in tqdm(ALLOWED_STOCKS):
+        getBestTree(ticker)

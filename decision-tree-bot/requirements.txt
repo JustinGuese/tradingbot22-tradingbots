@@ -1,0 +1,7 @@
+pandas
+numpy
+scipy
+sklearn
+matplotlib
+requests
+tqdm
