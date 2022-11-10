@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tradingbot22_JustinGuese"
+version = "0.0.1"
+authors = [
+  { name="Justin Güse", email="guese.justin@gmail.com" },
+]
+description = "A package containing the basebot to communicate with the tradingbot22 backend"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+[tool.setuptools.dynamic]
+dependencies = {file = ["./src/requirements.txt"]}
+
+[project.urls]
+"Homepage" = "https://aistockpriceprediction.com/"
+"Bug Tracker" = "https://aistockpriceprediction.com/"

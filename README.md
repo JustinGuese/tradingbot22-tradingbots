@@ -1,16 +1,14 @@
-individual bot needs to overwrite 
-getDecision function
+example usage
 
 ```
-class TrendBot(BaseBot):
-
-    def __init__(self, name: str, stock, backendurl: str = "http://127.0.0.1:8000"):
-        super().__init__(name, backendurl)
-        self.stock = stock
+if __name__ == "__main__":
+    bot = BaseBot("testbot")
+    print(bot.getPortfolio())
+    bot.buy("AAPL", 2000, amountInUSD=True)
+    print("portfolio after buy")
+    print(bot.getPortfolio())
+    print("portfolio after sell")
+    bot.sell("AAPL", 1500, amountInUSD=True)
+    print(bot.getPortfolio())
+    print("portfolio worth is: %.2f dollars" % bot.getPortfolioWorth())
 ```
-
-ALLOWED_STOCKS = [
-    "AAPL", "MSFT", "GOOG", "TSLA", 'AMD', 'AMZN', 'DG', 'KDP', 'LLY', 'NOC', 'NVDA', 'PGR', 'TEAM', 'UNH', 'WM',  # stocks
-    "CWEG.L", "IWDA.AS", "EEM", # etfs
-    "BTC-USD", "ETH-USD", "AVAX-USD" # crypto
-]
