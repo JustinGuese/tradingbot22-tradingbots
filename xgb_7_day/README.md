@@ -1,0 +1,1 @@
+based on theories of jupyternotebooks/xgb_7day_predictor.ipynb

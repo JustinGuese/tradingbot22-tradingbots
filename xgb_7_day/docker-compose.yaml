@@ -1,0 +1,23 @@
+version: "3"
+services:
+  xgb7day_tsla:
+    image: guestros/tradingbot22-bot:xgb_7_day_v1
+    build: .
+    container_name: xgb7day_tsla
+    network_mode: host # bc localhost backend connection
+    volumes:
+      - ./persistent/:/app/persistent/
+    environment:
+      - TICKER=TSLA
+      - BACKENDURL=http://localhost:8000
+
+  # xgb7day_amzn:
+  #   image: guestros/tradingbot22-bot:xgb_7_day_v1
+  #   build: .
+  #   container_name: xgb7day_amzn
+  #   network_mode: host # bc localhost backend connection
+  #   volumes:
+  #     - ./persistent/:/app/persistent/
+  #   environment:
+  #     - TICKER=AMZN
+  #     - BACKENDURL=http://localhost:8000

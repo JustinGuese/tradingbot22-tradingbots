@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: xgb-7-day-multbot-pvc
+  namespace: tradingbot22
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: xgb-7-day-multbot
+  namespace: tradingbot22
+spec:
+  schedule: "15 16 * * *"
+  # schedule: "* * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: tradingbot22-xgb-7-day-multbot
+            image: guestros/tradingbot22-bot:xgb_7_day_v1
+            imagePullPolicy: Always
+            env:
+            - name: TICKERS
+              value: "TSLA,MSFT,AAPL,ETH-USD,EEM"
+            volumeMounts:
+            - name: xgb-7-day-multbot-pv
+              mountPath: /app/persistent/
+          restartPolicy: OnFailure
+          volumes:
+          - name: xgb-7-day-multbot-pv
+            persistentVolumeClaim:
+              claimName: xgb-7-day-multbot-pvc
