@@ -84,7 +84,7 @@ class BaseBot:
     def getCurrentPrice(self, ticker: str):
         response = get(self.backendurl + '/data/current_price/' + quote_plus(ticker), headers=self.headers)
         if response.status_code != 200:
-            raise Exception("Error getting current price data: ", response.text)
+            raise Exception("Error getting current price data for %s: " % ticker, response.text)
         return float(response.text)
     
     def getTrend(self, df: pd.DataFrame) -> pd.DataFrame:
