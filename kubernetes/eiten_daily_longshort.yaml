@@ -1,0 +1,33 @@
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: eiten-longshort-daily-monthlyrebalance-pvc
+#   namespace: tradingbot22
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 500Mi
+# ---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: eiten-longshort-daily-monthlyrebalance
+  namespace: tradingbot22
+spec:
+  schedule: "30 16 15 * *" # every month on the 15ths
+  # schedule: "* * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: tradingbot22-eiten-longshort-daily-monthlyrebalance
+            image: guestros/tradingbot22-bot:eiten_v2
+            imagePullPolicy: Always
+            env:
+            - name: BACKENDURL
+              value: "http://tradingbot-baseimage-service:8000"
+          restartPolicy: OnFailure

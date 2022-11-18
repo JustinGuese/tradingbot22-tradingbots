@@ -1,0 +1,9 @@
+version: "3"
+services:
+  eiten:
+    image: guestros/tradingbot22-bot:eiten_v2
+    build: .
+    container_name: eiten_v2
+    network_mode: host # bc localhost backend connection
+    environment:
+      - BACKENDURL=http://localhost:8000
