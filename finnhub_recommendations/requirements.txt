@@ -1,0 +1,6 @@
+requests
+finnhub-python
+pandas
+numpy
+tqdm
+scipy

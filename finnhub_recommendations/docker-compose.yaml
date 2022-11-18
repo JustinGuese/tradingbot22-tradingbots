@@ -1,0 +1,10 @@
+version: "3"
+services:
+  eiten:
+    image: guestros/tradingbot22-bot:finnhub-recommendations
+    build: .
+    container_name: finnhub-recommendations
+    network_mode: host # bc localhost backend connection
+    environment:
+      - BACKENDURL=http://localhost:8000
+      - API_KEY=cdros4iad3icpst9vov0cdros4iad3icpst9vovg

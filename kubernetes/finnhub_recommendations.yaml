@@ -1,0 +1,35 @@
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: finnhub-recommendations-pvc
+#   namespace: tradingbot22
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 500Mi
+# ---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: finnhub-recommendations
+  namespace: tradingbot22
+spec:
+  schedule: "20 16 * * 3" # every wednesday on the 15ths
+  # schedule: "* * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: tradingbot22-finnhub-recommendations
+            image: guestros/tradingbot22-bot:finnhub-recommendations
+            imagePullPolicy: Always
+            env:
+            - name: BACKENDURL
+              value: "http://tradingbot-baseimage-service:8000"
+            - name: API_KEY
+              value: "cdros4iad3icpst9vov0cdros4iad3icpst9vovg"
+          restartPolicy: OnFailure
