@@ -35,6 +35,7 @@ for testtype in winners.keys():
     for ticker in portfolio.keys():
         crntWeights[ticker] = portfolio[ticker] * priceCache[ticker] / totalDollar
     print("current weights are: %s" % str(crntWeights))
+    print("target weights: ", str(winners[testtype]["weights"]))
     
     toBuy = dict()
     
@@ -45,18 +46,19 @@ for testtype in winners.keys():
             if crntWeights[ticker] < winners[testtype]["weights"][ticker]:
                 # we need to buy more
                 diff = winners[testtype]["weights"][ticker] - crntWeights[ticker] # only weight pct remember!
-                usdAmountToBuy = diff * totalDollar / priceCache[ticker]
+                usdAmountToBuy = diff * totalDollar 
                 # remember this until we have enough cash
                 toBuy[ticker] = usdAmountToBuy
             elif crntWeights[ticker] > winners[testtype]["weights"][ticker]:
                 # we need to sell
                 diff = crntWeights[ticker] - winners[testtype]["weights"][ticker]
-                usdAmountToSell = diff * totalDollar / priceCache[ticker]
+                usdAmountToSell = diff * totalDollar 
+                print("- selling %.2f$ of %s" % (usdAmountToSell, ticker))
                 bot.sell(ticker, usdAmountToSell, amountInUSD=True)
         else:
             # ticker not yet bought
             priceCache[ticker] = bot.getCurrentPrice(ticker)
-            usdAmountToBuy = winners[testtype]["weights"][ticker] * totalDollar / priceCache[ticker]
+            usdAmountToBuy = winners[testtype]["weights"][ticker] * totalDollar 
             toBuy[ticker] = usdAmountToBuy
             
     # now we have a list of what to buy
@@ -74,4 +76,5 @@ for testtype in winners.keys():
         assert sum(toBuy.values()) <= usd
     # now we can buy
     for ticker, usdAmount in toBuy.items():
+        print("- buying %.2f$ of %s" % (usdAmount, ticker))
         bot.buy(ticker, usdAmount, amountInUSD=True)

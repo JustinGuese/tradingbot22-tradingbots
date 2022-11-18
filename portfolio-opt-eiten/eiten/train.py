@@ -192,6 +192,14 @@ for weight in WEIGHTS:
 # and run again to kick out zero weights
 for [weight,ticker] in todelete:
     del WEIGHTS[weight][ticker]
+# next percentualize the weights (to sum up to 1)
+for weight in WEIGHTS:
+    total = np.sum([*WEIGHTS[weight].values()])
+    for ticker in WEIGHTS[weight]:
+        WEIGHTS[weight][ticker] = WEIGHTS[weight][ticker] / total
+    total = np.sum([*WEIGHTS[weight].values()])
+    if total != 1.:
+        raise ValueError("Weights do not sum up to 1.0")
 
 from pprint import pprint
 
