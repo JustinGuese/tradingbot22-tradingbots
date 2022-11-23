@@ -1,0 +1,122 @@
+{
+    "MSFT": {
+        "medchange": -0.1,
+        "medvariance": 0.19,
+        "all_changes": [
+            -0.1857265667217043,
+            -0.09652747968177655,
+            0.1842253779021787
+        ],
+        "best": {
+            "Research Development": 1.0,
+            "Selling General Administrative": 0.97,
+            "Net Income Applicable To Common Shares": -0.74,
+            "Interest Expense": -0.89
+        }
+    },
+    "AAPL": {
+        "medchange": -0.0,
+        "medvariance": 0.21,
+        "all_changes": [
+            -0.18618947721271278,
+            -0.0038574579106538513,
+            0.22815500634908198
+        ],
+        "best": {
+            "Research Development": 0.6,
+            "Total Other Income Expense Net": 0.44,
+            "Operating Income": -1.0,
+            "Income Before Tax": -1.0
+        }
+    },
+    "TSLA": {
+        "medchange": -0.01,
+        "medvariance": 0.37,
+        "all_changes": [
+            -0.38756062848718137,
+            -0.00998646227036011,
+            0.3525745111693957
+        ],
+        "best": {
+            "Total Other Income Expense Net": 1.0,
+            "Selling General Administrative": -0.26,
+            "Total Operating Expenses": -1.0,
+            "Cost Of Revenue": -1.0
+        }
+    },
+    "GOOG": {
+        "medchange": -0.05,
+        "medvariance": 0.16,
+        "all_changes": [
+            -0.23649216363983422,
+            -0.04642256993820132,
+            0.07551615432360916
+        ],
+        "best": {
+            "Ebit": 0.98,
+            "Operating Income": 0.98,
+            "Interest Expense": -0.45,
+            "win": -0.73
+        }
+    },
+    "NVDA": {
+        "medchange": -0.04,
+        "medvariance": 0.07,
+        "all_changes": [
+            -0.0057151968060451365,
+            -0.14478981151119336,
+            -0.042281056189669014
+        ],
+        "best": {
+            "win": 1.0,
+            "Research Development": 0.92,
+            "Selling General Administrative": -1.0,
+            "Income Before Tax": -1.0
+        }
+    },
+    "AMD": {
+        "medchange": -0.18,
+        "medvariance": 0.4,
+        "all_changes": [
+            -0.28515718464514866,
+            -0.17722732745346848,
+            0.4541686141447607
+        ],
+        "best": {
+            "Net Income": 1.0,
+            "Cost Of Revenue": 1.0,
+            "Ebit": -1.0,
+            "Income Tax Expense": -1.0
+        }
+    },
+    "INTC": {
+        "medchange": -0.05,
+        "medvariance": 0.12,
+        "all_changes": [
+            -0.25968527824775167,
+            -0.04909162800789865,
+            -0.03868221728312778
+        ],
+        "best": {
+            "Total Other Income Expense Net": 1.0,
+            "Income Tax Expense": 1.0,
+            "Total Revenue": -0.83,
+            "Gross Profit": -0.93
+        }
+    },
+    "AMZN": {
+        "medchange": -0.04,
+        "medvariance": 0.21,
+        "all_changes": [
+            -0.372707689495926,
+            -0.04490480032123203,
+            0.010063223911007654
+        ],
+        "best": {
+            "Operating Income": 0.77,
+            "Ebit": 0.77,
+            "Total Other Income Expense Net": -1.0,
+            "Income Tax Expense": -1.0
+        }
+    }
+}
