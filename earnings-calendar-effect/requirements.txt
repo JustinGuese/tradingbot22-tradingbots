@@ -1,0 +1,2 @@
+# pip install git+https://github.com/JustinGuese/tradingbot22-basebot/
+
