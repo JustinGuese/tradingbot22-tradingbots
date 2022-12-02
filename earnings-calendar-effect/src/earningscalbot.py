@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 from basebot22.basebot import BaseBot
 
-bot = BaseBot("testbot", backendurl = environ.get("BACKEND_URL", "http://tradingbot-baseimage-service:8000")) # backendurl = "https://trading:%s@tradingbot.datafortress.cloud" % environ["PW"]
+bot = BaseBot("earnings-calendar-effect-v1", backendurl = environ.get("BACKEND_URL", "http://tradingbot-baseimage-service:8000")) # backendurl = "https://trading:%s@tradingbot.datafortress.cloud" % environ["PW"]
 
 def __calculateExpectedMove(earningsFinanceData: dict):
     all_changes_list = earningsFinanceData["all_changes_list"] # from the previous#
