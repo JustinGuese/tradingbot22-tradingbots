@@ -1,3 +1,5 @@
+guestros/tradingbot22-bot:earnings-calendar-effect-v1
+
 this is a difficult one.
 see the total idea at: jupyternotebooks/earnings-calendar.ipynb
 
