@@ -92,8 +92,32 @@ def checkExpectedMove(ticker: str, earningsFinanceData: dict):
         "posVsNegCount" : posVsNegCount
     }
 
-def formTradingDecision():
-    pass
+def tradeOnDecision(ticker: str, expected: dict, howManyWaiting: int):
+    global bot
+    portfolio = bot.getPortfolio()
+    usd = portfolio["usd"]
+    usdThisTrade  = usd / howManyWaiting
+    # expected structure is:
+    # {
+    #     "expectedChange" : expectedChange,
+    #     "posVsNegCount" : posVsNegCount
+    # }
+    # act on that deicison
+    crntPrice = bot.getTickerPrice(ticker)
+    maximumdate = date.today() + timedelta(days=15)
+    if expected["posVsNegCount"] > 0:
+        # buy with stop loss
+        # TODO: somehow make this, that it waits for selling off take profit until it circles back. meaning that if it exceeds the take profit, wait until reversal to sell
+        takeProfitPrice = crntPrice * (1 + expected["expectedChange"]) * 0.99 # some safety net idk, need to test
+        stopLossPrice = crntPrice * 0.98 # what the fuck do i know
+        print("buying %s with take profit %s and stop loss %s" % (ticker, takeProfitPrice, stopLossPrice))
+        bot.buy(ticker, usdThisTrade, amountInUSD=True, close_if_above = takeProfitPrice, close_if_below = stopLossPrice, maximum_date = maximumdate)
+    else:
+        # short with stop loss
+        takeProfitPrice = crntPrice * (1 - expected["expectedChange"]) * 1.01 # some safety net idk, need to test
+        stopLossPrice = crntPrice * 1.02 # what
+        print("shorting %s with take profit %s and stop loss %s" % (ticker, takeProfitPrice, stopLossPrice))
+        bot.buy(ticker, usdThisTrade, amountInUSD=True, short=True, close_if_below = takeProfitPrice, close_if_above = stopLossPrice, maximum_date = maximumdate)
 
 # TODO: i dont trust the yf.calendar, i think it's maybe only the yearly earnings?
 # upcomingEarnings = bot.getEarningsCalendar(only_now = True) # y does it fail now?
@@ -132,11 +156,8 @@ else:
                 # if it is, then we can start trading
                 # print("we have an earnings update!!", currentEarningsFinanceData)
                 expected = checkExpectedMove(earningsObj["ticker"], earningsFinanceData)
-                # {
-                #     "expectedChange" : expectedChange,
-                #     "posVsNegCount" : posVsNegCount
-                # }
-                # act on that deicison
+                
+                tradeOnDecision(earningsObj["ticker"], expected, len(AllDone))
                 print("%s update arrived. expected move: " % earningsObj["ticker"], expected)
                 AllDone[i] = True
             else:
