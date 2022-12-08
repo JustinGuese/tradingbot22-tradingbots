@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: simple-yf-analyst-rating-v1
+  namespace: tradingbot22
+spec:
+  schedule: "30 09 * * 3" # wednesday 3:30
+  # schedule: "* * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: simple-yf-analyst-rating-v1
+            image: guestros/tradingbot22-bot:simple-analyst-rating-v1
+            imagePullPolicy: Always
+            env:
+            - name: BACKENDURL
+              value: "http://tradingbot-baseimage-service:8000"
+          restartPolicy: OnFailure
