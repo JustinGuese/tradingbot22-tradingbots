@@ -1,0 +1,5 @@
+basebot22-basebot-JustinGuese
+pandas
+requests
+numpy
+tqdm

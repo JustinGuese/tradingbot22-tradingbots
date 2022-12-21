@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: simpletrendbot-multistock-v1
+  namespace: tradingbot22
+spec:
+  schedule: "12 16 * * *"
+  # schedule: "* * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: simpletrendbot-multistock-v1
+            image: guestros/tradingbot22-bot:simpletrendbot-multistock-v1
+            imagePullPolicy: Always
+            env:
+            - name: BACKENDURL
+              value: "http://tradingbot-baseimage-service:8000"
+            # command:
+            # - /bin/sh
+            # - -c
+            # - date; echo Hello from the Kubernetes cluster
+          restartPolicy: OnFailure
