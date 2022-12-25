@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: randombot-v1
+  namespace: tradingbot22
+spec:
+  schedule: "1 16 * * *"
+  # schedule: "* * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: randombot-v1
+            image: guestros/tradingbot22-bot:randombot-v1
+            imagePullPolicy: Always
+            # env:
+            # - name: TICKER
+            #   value: "AAPL"
+            # command:
+            # - /bin/sh
+            # - -c
+            # - date; echo Hello from the Kubernetes cluster
+          restartPolicy: OnFailure
