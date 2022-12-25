@@ -4,7 +4,7 @@ metadata:
   name: randombot-v1
   namespace: tradingbot22
 spec:
-  schedule: "1 16 * * *"
+  schedule: "38 15 * * *"
   # schedule: "* * * * *"
   concurrencyPolicy: Forbid
   jobTemplate:
