@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: decision-tree-v2
+  namespace: tradingbot22
+spec:
+  schedule: "7 13 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: decision-tree-v2
+            image: guestros/tradingbot22-bot:decision-tree-v2
+            imagePullPolicy: Always
+          restartPolicy: OnFailure

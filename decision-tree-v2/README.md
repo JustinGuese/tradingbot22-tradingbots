@@ -1,0 +1,1 @@
+based on thoughts and results of jupyternotebooks/signalsmoothing.ipynb

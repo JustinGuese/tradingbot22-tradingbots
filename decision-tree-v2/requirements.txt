@@ -1,0 +1,2 @@
+basebot22-basebot-JustinGuese>=0.3.17
+pandas
