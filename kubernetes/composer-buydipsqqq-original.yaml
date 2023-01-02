@@ -1,0 +1,36 @@
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: composer-buydipsqqq-original-pvc
+#   namespace: tradingbot22
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Mi
+# ---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: composer-buydipsqqq-original
+  namespace: tradingbot22
+spec:
+  schedule: "40 1 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: composer-buydipsqqq-original
+            image: guestros/tradingbot22-bot:composer-buydipsqqq-original
+            imagePullPolicy: Always
+          #   volumeMounts:
+          #     - mountPath: /app/persistent/
+          #       name: composer-buydipsqqq-original-pv
+          # volumes:
+          #   - name: composer-buydipsqqq-original-pv
+          #     persistentVolumeClaim:
+          #       claimName: composer-buydipsqqq-original-pvc
+          restartPolicy: OnFailure
