@@ -17,7 +17,7 @@ cumret = {k: v for k, v in sorted(cumret.items(), key=lambda item: item[1], reve
 print("cumret: ", cumret)
 biggestTwo = list(cumret.keys())[:2]
 portfolio = bot.getPortfolio()
-usd = portfolio["USD"]
+usd = bot.getPortfolioWorth()
 if biggestTwo[0] not in portfolio:
     portfolio[biggestTwo[0]] = 0
 if biggestTwo[1] not in portfolio:
