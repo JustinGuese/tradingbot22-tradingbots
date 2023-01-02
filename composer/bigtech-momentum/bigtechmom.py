@@ -34,12 +34,17 @@ for ticker, amount in portfolio.items():
             crntPrice = bot.getCurrentPrice(ticker)
             holdingUSD = crntPrice * amount
             diff = targetUSD - holdingUSD
-            if abs(diff) > 100 and usd > 50:
+            if abs(diff) > 100:
                 # only act if the difference is more than 100 dollatz
                 if diff > 0:
-                    # buy
-                    print("buying", ticker, "for", diff, "USD")
-                    bot.buy(ticker, amount = diff, amountInUSD = True)
+                    cash = bot.getPortfolio()["USD"]
+                    if cash >= diff:
+                        # buy
+                        print("buying", ticker, "for", diff, "USD")
+                        bot.buy(ticker, amount = diff, amountInUSD = True)
+                    else:
+                        # maybe error?
+                        print("not enough cash to execute buy. cash: ", cash, "diff: ", diff)
                 else:
                     # sell
                     bot.sell(ticker, amount = abs(diff), amountInUSD = True)
