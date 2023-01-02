@@ -1,0 +1,36 @@
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: composer-buydipsqqq-shorting-gettrend-pvc
+#   namespace: tradingbot22
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Mi
+# ---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: composer-buydipsqqq-shorting-gettrend
+  namespace: tradingbot22
+spec:
+  schedule: "43 1 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: composer-buydipsqqq-shorting-gettrend
+            image: guestros/tradingbot22-bot:composer-buydipsqqq-shorting-gettrend
+            imagePullPolicy: Always
+          #   volumeMounts:
+          #     - mountPath: /app/persistent/
+          #       name: composer-buydipsqqq-shorting-gettrend-pv
+          # volumes:
+          #   - name: composer-buydipsqqq-shorting-gettrend-pv
+          #     persistentVolumeClaim:
+          #       claimName: composer-buydipsqqq-shorting-gettrend-pvc
+          restartPolicy: OnFailure
