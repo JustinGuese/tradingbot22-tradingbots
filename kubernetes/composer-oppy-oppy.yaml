@@ -1,0 +1,39 @@
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: composer-oppy-oppy-pvc
+#   namespace: tradingbot22
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Mi
+# ---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: composer-oppy-oppy
+  namespace: tradingbot22
+spec:
+  schedule: "23 2 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: composer-oppy-oppy
+            image: guestros/tradingbot22-bot:composer-oppy-v1
+            imagePullPolicy: Always
+            env:
+              - name: "MODE"
+                value: "opus"
+          #   volumeMounts:
+          #     - mountPath: /app/persistent/
+          #       name: composer-oppy-oppy-pv
+          # volumes:
+          #   - name: composer-oppy-oppy-pv
+          #     persistentVolumeClaim:
+          #       claimName: composer-oppy-oppy-pvc
+          restartPolicy: OnFailure

@@ -1,0 +1,39 @@
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: composer-oppy-largecapval-pvc
+#   namespace: tradingbot22
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Mi
+# ---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: composer-oppy-largecapval
+  namespace: tradingbot22
+spec:
+  schedule: "29 2 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: composer-oppy-largecapval
+            image: guestros/tradingbot22-bot:composer-oppy-v1
+            imagePullPolicy: Always
+            env:
+              - name: "MODE"
+                value: "largecapval"
+          #   volumeMounts:
+          #     - mountPath: /app/persistent/
+          #       name: composer-oppy-largecapval-pv
+          # volumes:
+          #   - name: composer-oppy-largecapval-pv
+          #     persistentVolumeClaim:
+          #       claimName: composer-oppy-largecapval-pvc
+          restartPolicy: OnFailure
