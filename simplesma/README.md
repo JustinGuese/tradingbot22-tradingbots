@@ -1,0 +1,1 @@
+taken from jupyternotebooks/simple-sma.ipynb
