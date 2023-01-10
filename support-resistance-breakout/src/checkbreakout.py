@@ -131,11 +131,11 @@ if len(buy) > 0:
     # buy with stop loss take profit
     for ticker, crntPrice in buy.items():
         # TODO: find fitting values
-        stopLoss = crntPrice * 1.02 # + 2 pct
+        stopLoss = crntPrice * 0.98 # + 2 pct
         takeProfit = crntPrice * 1.05 # + 5 pct
-        
+        assert takeProfit > stopLoss
         bot.buy(ticker, amount = usdPerBuy, amountInUSD = True, 
-                close_if_below = stopLoss, close_if_above = takeProfit)
+                close_if_below = stopLoss, close_if_above = takeProfit, maximum_date = datetime.utcnow().date() + timedelta(365))
         print("buying ", ticker, "with stop loss ", stopLoss, "and take profit ", takeProfit)
         
         
